@@ -239,6 +239,7 @@
                 btnKirim = document.querySelector('.btn-kirim')
                 btnLoading = document.querySelector('.btn-loading')
                 myAlert.classList.toggle('d-none')
+                form.reset()
             })
             .catch(error => console.error('Error!', error.message))
         })
