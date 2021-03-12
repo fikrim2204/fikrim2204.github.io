@@ -234,7 +234,12 @@
         btnKirim.classList.toggle('d-none')
 
           fetch(scriptURL, { method: 'POST', body: new FormData(form)})
-            .then(response => console.log('Success!', response))
+            .then(response => {
+                console.log('Success!', response)
+                btnKirim = document.querySelector('.btn-kirim')
+                btnLoading = document.querySelector('.btn-loading')
+                myAlert.classList.toggle('d-none')
+            })
             .catch(error => console.error('Error!', error.message))
         })
       </script>
