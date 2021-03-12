@@ -235,8 +235,8 @@
 
           fetch(scriptURL, { method: 'POST', body: new FormData(form)})
             .then(response => {
-                btnKirim = document.querySelector('.btn-kirim')
-                btnLoading = document.querySelector('.btn-loading')
+                btnLoading.classList.toggle('d-none')
+                btnKirim.classList.toggle('d-none')
                 myAlert.classList.toggle('d-none')
                 form.reset()
                 console.log('Success!', response)
