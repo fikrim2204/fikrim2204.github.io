@@ -168,7 +168,20 @@
                     </i>
                     Email: fikrimaulanadev@gmail.com || maulsana25@gmail.com
                 </p>
-            </div>
+            </div> <br>
+            <p>Let's get in touch. Send me a message:</p>
+
+            <form name="contact-form" action="/action_page.php" target="_blank">
+            <p><input class="w3-input w3-padding-16" type="text" placeholder="Name" required name="name"></p>
+            <p><input class="w3-input w3-padding-16" type="text" placeholder="Email" required name="email"></p>
+            <p><input class="w3-input w3-padding-16" type="text" placeholder="Subject" name="subject"></p>
+            <p><input class="w3-input w3-padding-16" type="text" placeholder="Message" required name="message"></p>
+            <p>
+                <button class="w3-button w3-light-grey w3-padding-large" type="submit">
+                <i class="fa fa-paper-plane"></i> SEND MESSAGE
+                </button>
+            </p>
+            </form>
             <!-- End Contact Section -->
         </div>
 
@@ -198,6 +211,17 @@
 
         <!-- END PAGE CONTENT -->
     </div>
+    <script>
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbz3CCYsPCR4EXfUpAJ6tGXTk5szIponfJCWxVx1Jysv9jVKIkbPSQl6igbBqFiFQSQuzw/exec'
+        const form = document.forms['contact-form']
+      
+        form.addEventListener('submit', e => {
+          e.preventDefault()
+          fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+            .then(response => console.log('Success!', response))
+            .catch(error => console.error('Error!', error.message))
+        })
+      </script>
 </body>
 
 </html>
