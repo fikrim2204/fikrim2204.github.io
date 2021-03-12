@@ -6,6 +6,7 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
 <style>
     body,
     h1,
@@ -170,15 +171,22 @@
                 </p>
             </div> <br>
             <p>Let's get in touch. Send me a message:</p>
-
+            <div class="alert alert-success alert-dismissible fade show my-alert" role="alert">
+                <strong>Terimakasih!</strong> Pesan berhasil terkirim.
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
             <form name="contact-form" action="/action_page.php" target="_blank">
             <p><input class="w3-input w3-padding-16" type="text" placeholder="Name" required name="name"></p>
             <p><input class="w3-input w3-padding-16" type="email" placeholder="Email" required name="email"></p>
             <p><input class="w3-input w3-padding-16" type="text" placeholder="Subject" name="subject"></p>
             <p><input class="w3-input w3-padding-16" type="text" placeholder="Message" required name="message"></p>
             <p>
-                <button class="w3-button w3-light-grey w3-padding-large" type="submit">
+                <button class="w3-button w3-light-grey w3-padding-large btn-kirim" type="submit">
                 <i class="fa fa-paper-plane"></i> SEND MESSAGE
+                </button>
+                <button class="w3-button w3-light-grey w3-padding-large btn-loading d-none" type="button" disabled>
+                    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                    Loading...
                 </button>
             </p>
             </form>
@@ -214,9 +222,17 @@
     <script>
         const scriptURL = 'https://script.google.com/macros/s/AKfycbz3CCYsPCR4EXfUpAJ6tGXTk5szIponfJCWxVx1Jysv9jVKIkbPSQl6igbBqFiFQSQuzw/exec'
         const form = document.forms['contact-form']
+        const btnKirim = document.querySelector('.btn-kirim')
+        const btnLoading = document.querySelector('.btn-loading')
+        const myAlert = document.querySelector('.my-alert')
       
         form.addEventListener('submit', e => {
           e.preventDefault()
+        //Ketika tombol submit diklik
+        //tampilkan tombol loading, hilangkan tombol kirim
+        btnLoading.classList.toggle('d-none')
+        btnKirim.classList.toggle('d-none')
+
           fetch(scriptURL, { method: 'POST', body: new FormData(form)})
             .then(response => console.log('Success!', response))
             .catch(error => console.error('Error!', error.message))
